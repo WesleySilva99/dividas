@@ -2,6 +2,7 @@ package br.com.wesley.dividas.controller;
 
 
 import br.com.wesley.dividas.dao.UsuarioDao;
+import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
 import br.com.wesley.dividas.util.Functions;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -85,10 +89,21 @@ public class UsuarioController {
 
                 usuarioLogado.setRendas(dao.listaRedas(u));
 
+                double totalDividas = 0;
+
+                if (u.getDividas() != null){
+                    for (Divida d:
+                            u.getDividas()) {
+                        totalDividas += d.getValor();
+                    }
+                }
+
                 session.setAttribute("usuarioLogado", usuarioLogado);
                 session.setAttribute("usuario", usuarioLogado.getLogin());
                 session.setAttribute("totalLiquido", biblioteca.calculaTotalLiquido(usuarioLogado.getRendas()));
                 session.setAttribute("totalBruto", biblioteca.calculaTotalBruto(usuarioLogado.getRendas()));
+
+                Functions.carregar(usuarioLogado, model);
 
                 caminho = "/sistema/index";
 
@@ -109,6 +124,31 @@ public class UsuarioController {
         }
 
         return caminho;
+    }
+
+    @RequestMapping("cadastraDivida")
+    public String cadastraDivida(HttpSession session, Model model, Divida d) {
+
+        UsuarioDao dao = new UsuarioDao();
+
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+
+        List<Divida> dividas = dao.listaDividas(usuarioLogado);
+
+        d.setData(new Date(System.currentTimeMillis()));
+
+        dividas.add(d);
+
+        usuarioLogado.setDividas(dividas);
+
+        dao.cadastrarDivida(usuarioLogado);
+
+        model.addAttribute("msg", "Divida Cadastrada Com Sucesso");
+
+        biblioteca.carregar(usuarioLogado, model);
+
+        return "/sistema/index";
+
     }
 
 }

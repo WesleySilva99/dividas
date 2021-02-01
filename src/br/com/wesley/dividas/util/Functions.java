@@ -1,8 +1,10 @@
 package br.com.wesley.dividas.util;
 
 import br.com.wesley.dividas.dao.UsuarioDao;
+import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -51,8 +53,20 @@ public class Functions {
 
     }
 
-    public void carregar(HttpSession session, Usuario u) {
+    public static void carregar(Usuario u, Model model) {
 
+        UsuarioDao dao = new UsuarioDao();
+
+        double totalDividas = 0;
+
+        for (Divida d:
+             u.getDividas()) {
+            totalDividas += d.getValor();
+        }
+
+        model.addAttribute("dividasDoMes", u.getDividas());
+
+        model.addAttribute("totalDividas", totalDividas);
 
     }
 

@@ -1,8 +1,8 @@
 package br.com.wesley.dividas.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Table(name = "dividas")
@@ -13,10 +13,13 @@ public class Divida {
     private int id;
 
     @Column
+    private String descricao;
+
+    @Column
     private double valor;
 
     @Column
-    private Timestamp data;
+    private Date data;
 
     public int getId() {
         return id;
@@ -34,11 +37,19 @@ public class Divida {
         this.valor = valor;
     }
 
-    public Timestamp getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Timestamp data) {
+    public void setData(Date data) {
         this.data = data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

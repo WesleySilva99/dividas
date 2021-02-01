@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="br">
+<html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
@@ -57,8 +57,10 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Renda Total(Liquida)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalLiquido")%></div>
+                                            Renda Total(Liquida)
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalLiquido")%>
+                                        </div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -75,8 +77,10 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Renda Total(Bruta)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalBruto")%></div>
+                                            Renda Total(Bruta)
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalBruto")%>
+                                        </div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -122,7 +126,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Pending Requests</div>
+                                            Pending Requests
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                     </div>
                                     <div class="col-auto">
@@ -137,7 +142,6 @@
                 <!-- Content Row -->
 
 
-
                 <!-- Content Row -->
                 <div class="row">
 
@@ -147,40 +151,23 @@
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Cadastro de Dividas</h6>
                             </div>
-                            <div class="card-body">
-                                <h4 class="small font-weight-bold">Server Migration <span
-                                        class="float-right">20%</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            <form class="user" method="post" action="cadastraDivida">
+                                <div class="form-group">
+                                    <input type="text" name="valor" class="form-control form-control-user"
+                                           id="exampleInputEmail" aria-describedby="emailHelp"
+                                           placeholder="Valor" value="">
                                 </div>
-                                <h4 class="small font-weight-bold">Sales Tracking <span
-                                        class="float-right">40%</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="form-group">
+                                    <input type="text" name="descricao" class="form-control form-control-user"
+                                           id="exampleInputPassword" placeholder="Descricao">
                                 </div>
-                                <h4 class="small font-weight-bold">Customer Database <span
-                                        class="float-right">60%</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar" role="progressbar" style="width: 60%"
-                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Payout Details <span
-                                        class="float-right">80%</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Account Setup <span
-                                        class="float-right">Complete!</span></h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Cadastrar
+                                </button>
+                                <hr>
+                            </form>
                         </div>
 
                         <!-- Color System -->
@@ -258,19 +245,29 @@
                         <!-- Illustrations -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Dividas do mes</h6>
                             </div>
                             <div class="card-body">
-                                <div class="text-center">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                         src="<%=request.getContextPath()%>/resources/template/img/undraw_posting_photo.svg" alt="">
-                                </div>
-                                <p>Add some quality, svg illustrations to your project courtesy of <a
-                                        target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                    constantly updated collection of beautiful svg images that you can use
-                                    completely free and without attribution!</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                    unDraw &rarr;</a>
+                                <table class="dataTable table-responsive">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Valor</th>
+                                    </tr>
+
+                                    <c:forEach items="${dividasDoMes}" var="divida">
+
+                                        <tr>
+                                            <td>${divida.descricao}</td>
+                                            <td>$${divida.valor}</td>
+                                        </tr>
+
+                                    </c:forEach>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td>${totalDividas}</td>
+                                    </tr>
+
+                                </table>
                             </div>
                         </div>
 

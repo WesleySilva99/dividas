@@ -1,5 +1,7 @@
 package br.com.wesley.dividas.controller;
 
+import br.com.wesley.dividas.model.Usuario;
+import br.com.wesley.dividas.util.Functions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,9 @@ public class SistemaController {
 	@RequestMapping("inicioSistema")
 	public String inicioLogado(HttpSession session, Model model) {
 
+		Usuario u = (Usuario) session.getAttribute("usuarioLogado");
 
+		Functions.carregar(u, model);
 
 		return "sistema/index";
 
