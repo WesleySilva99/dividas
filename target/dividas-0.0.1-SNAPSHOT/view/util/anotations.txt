@@ -1,0 +1,5 @@
+formula de calculo de salario
+salario = total
+inss = 14% do salário
+irff = 15% do inss
+salario - inss - irff
