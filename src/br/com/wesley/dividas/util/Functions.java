@@ -55,8 +55,6 @@ public class Functions {
 
     public static void carregar(Usuario u, Model model) {
 
-        UsuarioDao dao = new UsuarioDao();
-
         double totalDividas = 0;
 
         for (Divida d:

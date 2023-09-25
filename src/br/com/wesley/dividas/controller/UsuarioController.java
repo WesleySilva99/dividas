@@ -89,6 +89,8 @@ public class UsuarioController {
 
                 usuarioLogado.setRendas(dao.listaRedas(u));
 
+                usuarioLogado.setDividas(dao.listaDividas(u));
+
                 double totalDividas = 0;
 
                 if (u.getDividas() != null){
