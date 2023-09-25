@@ -41,7 +41,7 @@ public class Functions {
 
         double inss = 0.14 * salario;
 
-        double irrf = 0.15 * inss;
+        double irrf = 0.10 * salario;
 
         retorno.setValorBruto(salario);
 
@@ -57,14 +57,33 @@ public class Functions {
 
         double totalDividas = 0;
 
+        double totalRendas = 0;
+
         for (Divida d:
              u.getDividas()) {
             totalDividas += d.getValor();
         }
 
+        for (Renda r:
+             u.getRendas()) {
+
+            totalRendas += r.getValorLiquido();
+
+        }
+
+        double sobraMensal = totalRendas - totalDividas;
+
         model.addAttribute("dividasDoMes", u.getDividas());
 
         model.addAttribute("totalDividas", totalDividas);
+
+        model.addAttribute("rendas", u.getRendas());
+
+        model.addAttribute("rendaTotal", totalRendas);
+
+        model.addAttribute("sobraMensal", sobraMensal);
+
+        model.addAttribute("porcentagemSobra", descobrePorcentagem(totalRendas, sobraMensal).toString());
 
     }
 
@@ -123,6 +142,16 @@ public class Functions {
             retorno.add(r);
 
         }
+
+        return retorno;
+    }
+
+    public static Double descobrePorcentagem(double rendaLiquida, double sobraMensal){
+        double retorno = 0;
+
+        sobraMensal = sobraMensal * 100;
+
+        retorno = sobraMensal / rendaLiquida;
 
         return retorno;
     }

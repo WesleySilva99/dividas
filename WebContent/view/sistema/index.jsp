@@ -96,16 +96,16 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Sobra Mensal
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${sobraMensal}</div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
                                                     <div class="progress-bar bg-info" role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                         style="width: ${porcentagemSobra}%" aria-valuenow="${porcentagemSobra}" aria-valuemin="0"
                                                          aria-valuemax="100"></div>
                                                 </div>
                                             </div>
@@ -171,6 +171,7 @@
                         </div>
 
                         <!-- Color System -->
+                        <!--
                         <div class="row">
                             <div class="col-lg-6 mb-4">
                                 <div class="card bg-primary text-white shadow">
@@ -237,7 +238,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    -->
                     </div>
 
                     <div class="col-lg-6 mb-4">
@@ -272,6 +273,7 @@
                         </div>
 
                         <!-- Approach -->
+                        <!--
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
@@ -284,8 +286,79 @@
                                     Bootstrap framework, especially the utility classes.</p>
                             </div>
                         </div>
+                        -->
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Cadastro de Renda</h6>
+                            </div>
+                            <form class="user" method="post" action="cadastraRenda">
+                                <div class="form-group">
+                                    <input type="text" name="valor" class="form-control form-control-user"
+                                           id="exampleInputEmail" aria-describedby="emailHelp"
+                                           placeholder="Valor" value="">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" required="required" name="isSalario">
+                                        <option value="">-------------Salario?-----------</option>
+                                        <option value="1">
+                                            Yes
+                                        </option>
+                                        <option value="0">
+                                            No
+                                        </option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Cadastrar
+                                </button>
+                                <hr>
+                            </form>
+                        </div>
 
                     </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Todas as rendas</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="dataTable table-responsive">
+                                    <tr>
+                                        <th>Valor bruto</th>
+                                        <th>Valor liquido</th>
+                                    </tr>
+
+                                    <c:forEach items="${rendas}" var="renda">
+
+                                        <tr>
+                                            <td>${renda.valorBruto}</td>
+                                            <td>${renda.valorLiquido}</td>
+                                        </tr>
+
+                                    </c:forEach>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td>${rendaTotal}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>

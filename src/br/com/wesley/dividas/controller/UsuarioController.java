@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,7 +28,7 @@ public class UsuarioController {
     }
 
     @RequestMapping("inserirUsuario")
-    public String inserir(Usuario u, Model model,
+    public String inserirUsuario(Usuario u, Model model,
                           @RequestParam(name = "valor") String[] valores, @RequestParam(name = "isSalario") String[] isSalario) {
 
         String caminho = "";
@@ -143,9 +141,35 @@ public class UsuarioController {
 
         usuarioLogado.setDividas(dividas);
 
-        dao.cadastrarDivida(usuarioLogado);
+        dao.saveUsuario(usuarioLogado);
 
         model.addAttribute("msg", "Divida Cadastrada Com Sucesso");
+
+        biblioteca.carregar(usuarioLogado, model);
+
+        return "/sistema/index";
+
+    }
+
+    @RequestMapping("cadastraRenda")
+    public String cadastraRenda(HttpSession session, Model model,
+                                @RequestParam(name = "valor") String[] valor, @RequestParam(name = "isSalario") String[] isSalario) {
+
+        UsuarioDao dao = new UsuarioDao();
+
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+
+        List<Renda> todasrendas = dao.listaRedas(usuarioLogado);
+
+        List<Renda> rendaAtualTratada = biblioteca.trataRenda(valor, isSalario);
+
+        todasrendas.add(rendaAtualTratada.get(0));
+
+        usuarioLogado.setRendas(todasrendas);
+
+        dao.saveUsuario(usuarioLogado);
+
+        model.addAttribute("msg", "Renda Cadastrada Com Sucesso");
 
         biblioteca.carregar(usuarioLogado, model);
 

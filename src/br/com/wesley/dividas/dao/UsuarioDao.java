@@ -140,7 +140,7 @@ public class UsuarioDao {
 
     }
 
-    public void cadastrarDivida(Usuario u) {
+    public void saveUsuario(Usuario u) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();
