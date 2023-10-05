@@ -15,7 +15,7 @@ public class Divida {
     @Column
     private String descricao;
 
-    @Column
+    @Column(columnDefinition = "decimal(10,2)")
     private double valor;
 
     @Column

@@ -10,13 +10,13 @@ public class Renda {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "valor_bruto")
+    @Column(name = "valor_bruto", columnDefinition = "decimal(10,2)")
     private double valorBruto;
 
-    @Column(name = "valor_liquido")
+    @Column(name = "valor_liquido", columnDefinition = "decimal(10,2)")
     private double valorLiquido;
 
-    @Column
+    @Column(columnDefinition = "decimal(10,2)")
     private double descontos;
 
     public int getId() {

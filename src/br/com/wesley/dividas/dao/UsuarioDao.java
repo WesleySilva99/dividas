@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.wesley.dividas.model.Desejo;
 import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
@@ -167,6 +168,26 @@ public class UsuarioDao {
         query.setParameter("ultimoDia", ultimoDia);
 
         List<Divida> lista = query.getResultList();
+
+        manager.close();
+        factory.close();
+
+        return lista;
+
+    }
+
+    public List<Desejo> listaDesejos(Usuario u) {
+
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        EntityManager manager = factory.createEntityManager();
+        Query query = manager.createQuery("select u.desejos FROM Usuario u WHERE login = :paramLogin");
+        query.setParameter("paramLogin", u.getLogin());
+
+        List<Desejo> lista = query.getResultList();
+
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
 
         manager.close();
         factory.close();

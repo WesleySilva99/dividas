@@ -2,6 +2,7 @@ package br.com.wesley.dividas.controller;
 
 
 import br.com.wesley.dividas.dao.UsuarioDao;
+import br.com.wesley.dividas.model.Desejo;
 import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
@@ -13,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
 public class UsuarioController {
 
     Functions biblioteca = new Functions();
+
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
     @RequestMapping("exibirInserirUsuario")
     public String exibirInserir() {
@@ -89,6 +94,8 @@ public class UsuarioController {
 
                 usuarioLogado.setDividas(dao.listaDividas(u));
 
+                usuarioLogado.setDesejos(dao.listaDesejos(u));
+
                 double totalDividas = 0;
 
                 if (u.getDividas() != null){
@@ -103,7 +110,7 @@ public class UsuarioController {
                 session.setAttribute("totalLiquido", biblioteca.calculaTotalLiquido(usuarioLogado.getRendas()));
                 session.setAttribute("totalBruto", biblioteca.calculaTotalBruto(usuarioLogado.getRendas()));
 
-                Functions.carregar(usuarioLogado, model);
+                biblioteca.carregar(usuarioLogado, model);
 
                 caminho = "/sistema/index";
 
@@ -115,7 +122,7 @@ public class UsuarioController {
 
             }
 
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | ParseException e) {
 
             model.addAttribute("msg", "Tente novamente!");
 
@@ -127,7 +134,7 @@ public class UsuarioController {
     }
 
     @RequestMapping("cadastraDivida")
-    public String cadastraDivida(HttpSession session, Model model, Divida d) {
+    public String cadastraDivida(HttpSession session, Model model, Divida d) throws ParseException {
 
         UsuarioDao dao = new UsuarioDao();
 
@@ -153,7 +160,7 @@ public class UsuarioController {
 
     @RequestMapping("cadastraRenda")
     public String cadastraRenda(HttpSession session, Model model,
-                                @RequestParam(name = "valor") String[] valor, @RequestParam(name = "isSalario") String[] isSalario) {
+                                @RequestParam(name = "valor") String[] valor, @RequestParam(name = "isSalario") String[] isSalario) throws ParseException {
 
         UsuarioDao dao = new UsuarioDao();
 
@@ -170,6 +177,46 @@ public class UsuarioController {
         dao.saveUsuario(usuarioLogado);
 
         model.addAttribute("msg", "Renda Cadastrada Com Sucesso");
+
+        biblioteca.carregar(usuarioLogado, model);
+
+        return "/sistema/index";
+
+    }
+
+    @RequestMapping("cadastraDesejo")
+    public String cadastraDesejo(HttpSession session, Model model, Desejo d) throws ParseException {
+
+        UsuarioDao dao = new UsuarioDao();
+
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+
+        if(d.getDataDeCompra() != null){
+            java.util.Date dataFormatada = formato.parse(d.getDataDeCompra());
+
+            java.util.Date hoje = new java.util.Date(System.currentTimeMillis());
+
+            if(dataFormatada.compareTo(hoje) == -1){
+
+                model.addAttribute("msg", "Data de desejo inferior a data de hoje... insira uma data valida");
+
+                biblioteca.carregar(usuarioLogado, model);
+
+                return "/sistema/index";
+
+            }
+
+        }
+
+        List<Desejo> desejos = dao.listaDesejos(usuarioLogado);
+
+        desejos.add(d);
+
+        usuarioLogado.setDesejos(desejos);
+
+        dao.saveUsuario(usuarioLogado);
+
+        model.addAttribute("msg", "Desejo Cadastrado Com Sucesso");
 
         biblioteca.carregar(usuarioLogado, model);
 

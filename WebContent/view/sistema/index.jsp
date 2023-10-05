@@ -4,11 +4,7 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-16LE">
 
     <title>SB Admin 2 - Dashboard</title>
 
@@ -59,7 +55,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Renda Total(Liquida)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalLiquido")%>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">R$<%=request.getSession().getAttribute("totalLiquido")%>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -79,7 +75,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Renda Total(Bruta)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalBruto")%>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">R$<%=request.getSession().getAttribute("totalBruto")%>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -100,7 +96,7 @@
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${sobraMensal}</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$${sobraMensal}</div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
@@ -241,36 +237,37 @@
                     -->
                     </div>
 
-                    <div class="col-lg-6 mb-4">
 
-                        <!-- Illustrations -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Dividas do mes</h6>
-                            </div>
-                            <div class="card-body">
-                                <table class="dataTable table-responsive">
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Valor</th>
-                                    </tr>
+                        <div class="col-lg-6 mb-4">
 
-                                    <c:forEach items="${dividasDoMes}" var="divida">
-
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Dividas do mes</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="dataTable table-responsive table-bordered">
                                         <tr>
-                                            <td>${divida.descricao}</td>
-                                            <td>$${divida.valor}</td>
+                                            <th>Description</th>
+                                            <th>Valor</th>
                                         </tr>
 
-                                    </c:forEach>
-                                    <tr>
-                                        <td>Total:</td>
-                                        <td>${totalDividas}</td>
-                                    </tr>
+                                        <c:forEach items="${dividasDoMes}" var="divida">
 
-                                </table>
+                                            <tr>
+                                                <td>${divida.descricao}</td>
+                                                <td>R$${divida.valor}</td>
+                                            </tr>
+
+                                        </c:forEach>
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td>R$${totalDividas}</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
                             </div>
-                        </div>
 
                         <!-- Approach -->
                         <!--
@@ -334,7 +331,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Todas as rendas</h6>
                             </div>
                             <div class="card-body">
-                                <table class="dataTable table-responsive">
+                                <table class="dataTable table-responsive table-bordered">
                                     <tr>
                                         <th>Valor bruto</th>
                                         <th>Valor liquido</th>
@@ -343,20 +340,107 @@
                                     <c:forEach items="${rendas}" var="renda">
 
                                         <tr>
-                                            <td>${renda.valorBruto}</td>
-                                            <td>${renda.valorLiquido}</td>
+                                            <td>R$${renda.valorBruto}</td>
+                                            <td>R$${renda.valorLiquido}</td>
                                         </tr>
 
                                     </c:forEach>
                                     <tr>
                                         <td>Total:</td>
-                                        <td>${rendaTotal}</td>
+                                        <td>R$${rendaTotal}</td>
                                     </tr>
 
                                 </table>
                             </div>
                         </div>
 
+                    </div>
+
+                </div>
+
+                <!-- Desejos -->
+
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Cadastro de desejo</h6>
+                            </div>
+                            <form class="user" method="post" action="cadastraDesejo">
+                                <div class="form-group">
+                                    <input type="text" name="descricao" class="form-control form-control-user"
+                                           id="exampleInputEmail" aria-describedby="emailHelp"
+                                           placeholder="Descricao" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="valor" class="form-control form-control-user"
+                                           id="exampleInputEmail" aria-describedby="emailHelp"
+                                           placeholder="Valor" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="dataDeCompra" class="form-control form-control-user"
+                                           id="exampleInputEmail" aria-describedby="emailHelp"
+                                           placeholder="Valor" value="">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Cadastrar
+                                </button>
+                                <hr>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Desejos de compra</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="dataTable table-responsive table-bordered">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Valor</th>
+                                        <th>Quando Deseja Comprar?</th>
+                                        <th>Jah foi comprado?</th>
+                                        <th>Actions</th>
+                                    </tr>
+
+                                    <c:forEach items="${desejos}" var="desejo">
+
+                                        <tr>
+                                            <td>${desejo.descricao}</td>
+                                            <td>R$${desejo.valor}</td>
+                                            <td>${desejo.dataDeCompra}</td>
+                                            <th>
+                                                <c:choose>
+                                                    <c:when test="${desejo.status}">
+                                                        Sim
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        Nops ;-;
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+
+                                    </c:forEach>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td colspan="4">R$${valorTotalDesejos}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

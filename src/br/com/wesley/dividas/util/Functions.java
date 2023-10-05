@@ -1,16 +1,22 @@
 package br.com.wesley.dividas.util;
 
 import br.com.wesley.dividas.dao.UsuarioDao;
+import br.com.wesley.dividas.model.Desejo;
 import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Functions {
+
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     public boolean verificaLoginExistente(String login) {
 
@@ -53,21 +59,46 @@ public class Functions {
 
     }
 
-    public static void carregar(Usuario u, Model model) {
+    public double calculaTotalLiquido(List<Renda> rendas) {
+
+        double retorno = 0;
+
+        for (Renda r : rendas) {
+
+            retorno += r.getValorLiquido();
+
+        }
+
+        return retorno;
+
+    }
+
+    public void carregar(Usuario u, Model model) throws ParseException {
 
         double totalDividas = 0;
 
         double totalRendas = 0;
 
+        double valorTotalDesejos = 0;
+
         for (Divida d:
-             u.getDividas()) {
+                u.getDividas()) {
             totalDividas += d.getValor();
         }
 
         for (Renda r:
-             u.getRendas()) {
+                u.getRendas()) {
 
             totalRendas += r.getValorLiquido();
+
+        }
+
+        for (Desejo d:
+                u.getDesejos()) {
+
+            valorTotalDesejos += d.getValor();
+
+            d.setDataDeCompra(this.converteFormato(d.getDataDeCompra()));
 
         }
 
@@ -85,19 +116,10 @@ public class Functions {
 
         model.addAttribute("porcentagemSobra", descobrePorcentagem(totalRendas, sobraMensal).toString());
 
-    }
+        model.addAttribute("valorTotalDesejos", valorTotalDesejos);
 
-    public double calculaTotalLiquido(List<Renda> rendas) {
+        model.addAttribute("desejos", u.getDesejos());
 
-        double retorno = 0;
-
-        for (Renda r : rendas) {
-
-            retorno += r.getValorLiquido();
-
-        }
-
-        return retorno;
 
     }
 
@@ -154,6 +176,32 @@ public class Functions {
         retorno = sobraMensal / rendaLiquida;
 
         return retorno;
+    }
+
+    public Date converterStringEmData(String data) throws ParseException {
+
+        Date retorno = this.formato.parse(data);
+
+        return retorno;
+
+    }
+
+    public String converterDataEmString(Date data) throws ParseException {
+
+        return this.formato.format(data);
+
+    }
+
+    private String converteFormato(String date){
+
+        String retorno = "";
+
+        String[] aux = date.split("-");
+
+        retorno = aux[2] + "/" + aux[1] + "/" + aux[0];
+
+        return retorno;
+
     }
 
 }

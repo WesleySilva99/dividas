@@ -7,10 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 
 @Controller
 public class SistemaController {
-	
+
+	Functions biblioteca = new Functions();
+
 	@RequestMapping("/")
 	public String inicio() {
 		
@@ -19,11 +22,11 @@ public class SistemaController {
 	}
 
 	@RequestMapping("inicioSistema")
-	public String inicioLogado(HttpSession session, Model model) {
+	public String inicioLogado(HttpSession session, Model model) throws ParseException {
 
 		Usuario u = (Usuario) session.getAttribute("usuarioLogado");
 
-		Functions.carregar(u, model);
+		biblioteca.carregar(u, model);
 
 		return "sistema/index";
 
