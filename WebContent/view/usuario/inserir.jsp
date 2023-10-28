@@ -107,7 +107,7 @@
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="text" name="valor" class="form-control form-control-user"
                                                        id="exampleFirstName"
-                                                       placeholder="Renda" value="">
+                                                       placeholder="Renda" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 Salario?

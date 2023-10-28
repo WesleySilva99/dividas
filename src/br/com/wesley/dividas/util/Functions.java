@@ -1,13 +1,15 @@
 package br.com.wesley.dividas.util;
 
+import br.com.wesley.dividas.dao.LoteDao;
 import br.com.wesley.dividas.dao.UsuarioDao;
 import br.com.wesley.dividas.model.Desejo;
 import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
+import br.com.wesley.dividas.model.carnaval.Lote;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,6 +106,10 @@ public class Functions {
 
         double sobraMensal = totalRendas - totalDividas;
 
+        LoteDao loteDao = new LoteDao();
+
+        List<Lote> lotesCadastrados = loteDao.getAllLote();
+
         model.addAttribute("dividasDoMes", u.getDividas());
 
         model.addAttribute("totalDividas", totalDividas);
@@ -119,6 +125,8 @@ public class Functions {
         model.addAttribute("valorTotalDesejos", valorTotalDesejos);
 
         model.addAttribute("desejos", u.getDesejos());
+
+        model.addAttribute("lotes", lotesCadastrados);
 
 
     }

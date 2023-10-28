@@ -1,6 +1,7 @@
 package br.com.wesley.dividas.model;
 
 
+import br.com.wesley.dividas.model.carnaval.Camarote;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -53,6 +54,5 @@ public class Usuario {
 			inverseJoinColumns={@JoinColumn(name="id_desejo",
 					referencedColumnName="id")})
 	private List<Desejo> desejos;
-
 
 }

@@ -43,6 +43,22 @@
         </div>
     </li>
 
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCamarote"
+           aria-expanded="true" aria-controls="collapseCamarote">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Camarotes</span>
+        </a>
+        <div id="collapseCamarote" class="collapse" aria-labelledby="headingCamarote" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Administração de <br> camarotes:</h6>
+                <a class="collapse-item" href="exibirCadastrarCamarote">Cadastrar</a>
+                <a class="collapse-item" href="listarCamarotes">Consultar</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

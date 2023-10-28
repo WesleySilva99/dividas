@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
 public class UsuarioController {
+
+    DecimalFormat formatoReal = new DecimalFormat("R$####.##");
 
     Functions biblioteca = new Functions();
 
@@ -107,7 +110,7 @@ public class UsuarioController {
 
                 session.setAttribute("usuarioLogado", usuarioLogado);
                 session.setAttribute("usuario", usuarioLogado.getLogin());
-                session.setAttribute("totalLiquido", biblioteca.calculaTotalLiquido(usuarioLogado.getRendas()));
+                session.setAttribute("totalLiquido", formatoReal.format(biblioteca.calculaTotalLiquido(usuarioLogado.getRendas())));
                 session.setAttribute("totalBruto", biblioteca.calculaTotalBruto(usuarioLogado.getRendas()));
 
                 biblioteca.carregar(usuarioLogado, model);

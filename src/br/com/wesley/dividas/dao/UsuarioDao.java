@@ -9,6 +9,7 @@ import br.com.wesley.dividas.model.Desejo;
 import br.com.wesley.dividas.model.Divida;
 import br.com.wesley.dividas.model.Renda;
 import br.com.wesley.dividas.model.Usuario;
+import br.com.wesley.dividas.model.carnaval.Camarote;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -184,6 +185,26 @@ public class UsuarioDao {
         query.setParameter("paramLogin", u.getLogin());
 
         List<Desejo> lista = query.getResultList();
+
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+
+        manager.close();
+        factory.close();
+
+        return lista;
+
+    }
+
+    public List<Camarote> listaCamarotes(Usuario u) {
+
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        EntityManager manager = factory.createEntityManager();
+        Query query = manager.createQuery("select u.camarotes FROM Usuario u WHERE login = :paramLogin");
+        query.setParameter("paramLogin", u.getLogin());
+
+        List<Camarote> lista = query.getResultList();
 
         if (lista == null) {
             lista = new ArrayList<>();

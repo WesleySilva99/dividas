@@ -246,26 +246,35 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Dividas do mes</h6>
                                 </div>
                                 <div class="card-body">
-                                    <table class="dataTable table-responsive table-bordered">
-                                        <tr>
-                                            <th>Description</th>
-                                            <th>Valor</th>
-                                        </tr>
-
-                                        <c:forEach items="${dividasDoMes}" var="divida">
-
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
                                             <tr>
-                                                <td>${divida.descricao}</td>
-                                                <td>R$${divida.valor}</td>
+                                                <th>Description</th>
+                                                <th>Valor</th>
                                             </tr>
 
-                                        </c:forEach>
-                                        <tr>
-                                            <td>Total:</td>
-                                            <td>R$${totalDividas}</td>
-                                        </tr>
+                                            <c:forEach items="${dividasDoMes}" var="divida">
 
-                                    </table>
+                                                <tr>
+                                                    <td>${divida.descricao}</td>
+                                                    <td>
+                                                        <center>
+                                                            R$${divida.valor}
+                                                        </center>
+                                                    </td>
+                                                </tr>
+
+                                            </c:forEach>
+                                            <tr>
+                                                <td>Total:</td>
+                                                <td>
+                                                    <center>
+                                                        R$${totalDividas}</center>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
@@ -331,26 +340,40 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Todas as rendas</h6>
                             </div>
                             <div class="card-body">
-                                <table class="dataTable table-responsive table-bordered">
-                                    <tr>
-                                        <th>Valor bruto</th>
-                                        <th>Valor liquido</th>
-                                    </tr>
-
-                                    <c:forEach items="${rendas}" var="renda">
-
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
                                         <tr>
-                                            <td>R$${renda.valorBruto}</td>
-                                            <td>R$${renda.valorLiquido}</td>
+                                            <th>Valor bruto</th>
+                                            <th>Valor liquido</th>
                                         </tr>
 
-                                    </c:forEach>
-                                    <tr>
-                                        <td>Total:</td>
-                                        <td>R$${rendaTotal}</td>
-                                    </tr>
+                                        <c:forEach items="${rendas}" var="renda">
 
-                                </table>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        R$${renda.valorBruto}
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        R$${renda.valorLiquido}
+                                                    </center>
+                                                </td>
+                                            </tr>
+
+                                        </c:forEach>
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td>
+                                                <center>
+                                                    R$${rendaTotal}
+                                                </center>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -404,41 +427,51 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Desejos de compra</h6>
                             </div>
                             <div class="card-body">
-                                <table class="dataTable table-responsive table-bordered">
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Valor</th>
-                                        <th>Quando Deseja Comprar?</th>
-                                        <th>Jah foi comprado?</th>
-                                        <th>Actions</th>
-                                    </tr>
-
-                                    <c:forEach items="${desejos}" var="desejo">
-
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
                                         <tr>
-                                            <td>${desejo.descricao}</td>
-                                            <td>R$${desejo.valor}</td>
-                                            <td>${desejo.dataDeCompra}</td>
-                                            <th>
-                                                <c:choose>
-                                                    <c:when test="${desejo.status}">
-                                                        Sim
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        Nops ;-;
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </th>
-                                            <th></th>
+                                            <th>Description</th>
+                                            <th>Valor</th>
+                                            <th>Quando Deseja Comprar?</th>
+                                            <th>Jah foi comprado?</th>
+                                            <th>Actions</th>
                                         </tr>
 
-                                    </c:forEach>
-                                    <tr>
-                                        <td>Total:</td>
-                                        <td colspan="4">R$${valorTotalDesejos}</td>
-                                    </tr>
+                                        <c:forEach items="${desejos}" var="desejo">
 
-                                </table>
+                                            <tr>
+                                                <td>${desejo.descricao}</td>
+                                                <td>
+                                                    <center>
+                                                        R$${desejo.valor}
+                                                    </center>
+                                                </td>
+                                                <td>${desejo.dataDeCompra}</td>
+                                                <th>
+                                                    <c:choose>
+                                                        <c:when test="${desejo.status}">
+                                                            Sim
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Nops ;-;
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+
+                                        </c:forEach>
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td colspan="4">
+                                                <center>
+                                                    R$${valorTotalDesejos}
+                                                </center>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
