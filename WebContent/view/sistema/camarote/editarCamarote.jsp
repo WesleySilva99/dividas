@@ -6,7 +6,7 @@
 
     <meta charset="UTF-16LE">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Alterar Camarote</title>
 
     <c:import url="../../util/importsCss.jsp"></c:import>
     <c:if test="${msg != null}">

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-16LE">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Wesley Silva Gastos Programados</title>
 
     <c:import url="../util/importsCss.jsp"></c:import>
     <c:if test="${msg != null}">
@@ -55,7 +55,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Renda Total(Liquida)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">R$<%=request.getSession().getAttribute("totalLiquido")%>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalLiquido")%>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -75,7 +75,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Renda Total(Bruta)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">R$<%=request.getSession().getAttribute("totalBruto")%>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%=request.getSession().getAttribute("totalBruto")%>
                                         </div>
                                     </div>
                                     <div class="col-auto">

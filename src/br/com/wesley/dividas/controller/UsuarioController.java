@@ -111,7 +111,7 @@ public class UsuarioController {
                 session.setAttribute("usuarioLogado", usuarioLogado);
                 session.setAttribute("usuario", usuarioLogado.getLogin());
                 session.setAttribute("totalLiquido", formatoReal.format(biblioteca.calculaTotalLiquido(usuarioLogado.getRendas())));
-                session.setAttribute("totalBruto", biblioteca.calculaTotalBruto(usuarioLogado.getRendas()));
+                session.setAttribute("totalBruto", formatoReal.format(biblioteca.calculaTotalBruto(usuarioLogado.getRendas())));
 
                 biblioteca.carregar(usuarioLogado, model);
 
